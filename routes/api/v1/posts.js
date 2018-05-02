@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 // Post Model
-const Post = require('../../models/Post');
+const Post = require('../../../models/Post');
 // Profile Model
-const Profile = require('../../models/Profile');
+const Profile = require('../../../models/Profile');
 
 // Validation
-const validatePostInput = require('../../validation/post');
+const validatePostInput = require('../../../validation/post');
 
-module.exports = app => {
+module.exports = v1Router => {
 
 	// @route   GET api/posts/
 	// @desc		Get Post
@@ -186,5 +186,5 @@ module.exports = app => {
 			.catch(err => res.status(404).json({ postnotfound: 'No Post Found' }))
 	});
 
-	app.use('/api/posts', router);
+	v1Router.use('/posts', router);
 }

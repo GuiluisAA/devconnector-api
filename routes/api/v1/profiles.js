@@ -4,16 +4,16 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 // Load Validation
-const validateProfileInput = require('../../validation/profile');
-const validateExperienceInput = require('../../validation/experience');
-const validateEducationInput = require('../../validation/education');
+const validateProfileInput = require('../../../validation/profile');
+const validateExperienceInput = require('../../../validation/experience');
+const validateEducationInput = require('../../../validation/education');
 
 // Load Profile Model
-const Profile = require('../../models/Profile');
+const Profile = require('../../../models/Profile');
 // Load User Model
-const User = require('../../models/User');
+const User = require('../../../models/User');
 
-module.exports = app => {
+module.exports = v1Router => {
 
 	// @route		GET api/profile
 	// @desc		Get current user profile
@@ -269,5 +269,5 @@ module.exports = app => {
 			})
 	});
 
-	app.use('/api/profile', router);
+	v1Router.use('/profiles', router);
 }

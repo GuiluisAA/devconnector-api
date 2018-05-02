@@ -3,17 +3,17 @@ const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
+const keys = require('../../../config/keys');
 const passport = require('passport');
 
 // Load Input Validation
-const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login');
+const validateRegisterInput = require('../../../validation/register');
+const validateLoginInput = require('../../../validation/login');
 
 // Load User model
-const User = require('../../models/User');
+const User = require('../../../models/User');
 
-module.exports = app => {
+module.exports = v1Router => {
 
 	// @route		POST api/users/test
 	// @desc		Register user
@@ -118,5 +118,5 @@ module.exports = app => {
 		})
 	});
 
-	app.use('/api/users', router);
+	v1Router.use('/users', router);
 }
