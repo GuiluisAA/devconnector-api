@@ -14,10 +14,12 @@ module.exports = v1Router => {
 	 */
 	router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
 		res.json({
-			_id: req.user.id,
-			name: req.user.name,
-			email: req.user.email
-		})
+			user: {
+				_id: req.user.id,
+				name: req.user.name,
+				email: req.user.email
+			}
+		});
 	});
 
 	v1Router.use('/users', router);
