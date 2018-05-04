@@ -7,6 +7,7 @@ module.exports = function validateProfileInput(data) {
 	data.handle = !isEmpty(data.handle) ? data.handle : '';
 	data.status = !isEmpty(data.status) ? data.status : '';
 	data.skills = !isEmpty(data.skills) ? data.skills : '';
+	data.social = !isEmpty(data.social) ? data.social : '';
 
 	if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
 		errors.handle = 'Handle nedds to between 2 and 40 characters';
@@ -28,23 +29,23 @@ module.exports = function validateProfileInput(data) {
 		errors.website = 'Not a valid URL';
 	}
 
-	if(!isEmpty(data.youtube) && !Validator.isURL(data.youtube)) {
+	if(!isEmpty(data.social.youtube) && !Validator.isURL(data.social.youtube)) {
 		errors.youtube = 'Not a valid URL';
 	}
 
-	if(!isEmpty(data.twitter) && !Validator.isURL(data.twitter)) {
+	if(!isEmpty(data.social.twitter) && !Validator.isURL(data.social.twitter)) {
 		errors.twitter = 'Not a valid URL';
 	}
 
-	if(!isEmpty(data.facebook) && !Validator.isURL(data.facebook)) {
+	if(!isEmpty(data.social.facebook) && !Validator.isURL(data.social.facebook)) {
 		errors.facebook = 'Not a valid URL';
 	}
 
-	if(!isEmpty(data.linkedin) && !Validator.isURL(data.linkedin)) {
+	if(!isEmpty(data.social.linkedin) && !Validator.isURL(data.social.linkedin)) {
 		errors.linkedin = 'Not a valid URL';
 	}
 
-	if(!isEmpty(data.instagram) && !Validator.isURL(data.instagram)) {
+	if(!isEmpty(data.social.instagram) && !Validator.isURL(data.social.instagram)) {
 		errors.instagram = 'Not a valid URL';
 	}
 
