@@ -17,7 +17,8 @@ module.exports = v1Router => {
 			user: {
 				_id: req.user.id,
 				name: req.user.name,
-				email: req.user.email
+				email: req.user.email,
+				avatar: req.user.avatar,
 			}
 		});
 	});
