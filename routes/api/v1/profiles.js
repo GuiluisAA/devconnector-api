@@ -95,7 +95,7 @@ module.exports = v1Router => {
 
   /**
    * @route		POST api/v1/profiles/
-   * @desc		Create or Edit user profile
+   * @desc		Create user profile
    * @access	Private
    */  
   router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -155,7 +155,10 @@ module.exports = v1Router => {
    * @access	Public
    */  
   router.post('/experience', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { errors, isValid } = validateExperienceInput(req.body);
+
+    const newExperience = req.body.experience;
+
+    const { errors, isValid } = validateExperienceInput(newExperience);
   
     if (!isValid) {
       return res.status(400).json(errors);
@@ -164,27 +167,29 @@ module.exports = v1Router => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
         const newExp = {
-          title: req.body.title,
-          company: req.body.company,
-          location: req.body.location,
-          from: req.body.from,
-          to: req.body.to,
-          current: req.body.current,
-          description: req.body.description,
+          title: newExperience.title,
+          company: newExperience.company,
+          location: newExperience.location,
+          from: newExperience.from,
+          to: newExperience.to,
+          current: newExperience.current,
+          description: newExperience.description,
         }
   
         //Add to experience array
         profile.experience.unshift(newExp);
-        profile.save().then(profile => res.json(profile))
+        profile.save()
+        .then(profile => res.json(profile))
+        .catch(error => res.status(500).json(error));
       })
   });
 
   /**
-   * @route		DELETE api/profile/experience/:exp_id
+   * @route		DELETE api/profile/experience/:experience_id
    * @desc		Create Experience
    * @access	Public
    */
-  router.delete('/experience/:exp_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  router.delete('/experience/:experience_id', passport.authenticate('jwt', { session: false }), (req, res) => {
   
     Profile.findOne({ user: req.user.id })
       .then(profile => {
@@ -192,7 +197,7 @@ module.exports = v1Router => {
         // Get remove index
         const removeIndex = profile.experience
           .map(item => item.id)
-          .indexOf(req.param.exp_id);
+          .indexOf(req.param.experience_id);
   
           // Splice out of array
           profile.experience.splice(removeIndex, 1);
@@ -211,7 +216,10 @@ module.exports = v1Router => {
    * @access	Public
    */  
   router.post('/education', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { errors, isValid } = validateEducationInput(req.body);
+
+    const newEducation = req.body.education;
+
+    const { errors, isValid } = validateEducationInput(newEducation);
   
     if (!isValid) {
       return res.status(400).json(errors);
@@ -220,27 +228,29 @@ module.exports = v1Router => {
     Profile.findOne({ user: req.user.id })
       .then(profile => {
         const newEdu = {
-          school: req.body.school,
-          degree: req.body.degree,
-          fieldofstudy: req.body.fieldofstudy,
-          from: req.body.from,
-          to: req.body.to,
-          current: req.body.current,
-          description: req.body.description,
+          school: newEducation.school,
+          degree: newEducation.degree,
+          field_of_study: newEducation.field_of_study,
+          from: newEducation.from,
+          to: newEducation.to,
+          current: newEducation.current,
+          description: newEducation.description,
         }
   
         //Add to education array
         profile.education.unshift(newEdu);
-        profile.save().then(profile => res.json(profile))
+        profile.save()
+          .then(profile => res.json(profile))
+          .catch(error => res.status(500).json(error))
       })
   });
 
   /**
-   * @route		DELETE api/profile/education/:edu_id
+   * @route		DELETE api/profile/education/:education_id
    * @desc		Create Experience
    * @access	Private
    */  
-  router.delete('/education/:edu_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  router.delete('/education/:education_id', passport.authenticate('jwt', { session: false }), (req, res) => {
   
     Profile.findOne({ user: req.user.id })
       .then(profile => {
@@ -248,7 +258,7 @@ module.exports = v1Router => {
         // Get remove index
         const removeIndex = profile.education
           .map(item => item.id)
-          .indexOf(req.param.edu_id);
+          .indexOf(req.param.education_id);
   
         // Splice out of array
         profile.education.splice(removeIndex, 1);
