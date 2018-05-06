@@ -150,7 +150,7 @@ module.exports = v1Router => {
   });
 
   /**
-   * @route		POST api/profile/experience
+   * @route		POST api/v1/profiles/experience
    * @desc		Create Experience
    * @access	Public
    */  
@@ -185,7 +185,7 @@ module.exports = v1Router => {
   });
 
   /**
-   * @route		DELETE api/profile/experience/:experience_id
+   * @route		DELETE api/v1/profiles/experience/:experience_id
    * @desc		Create Experience
    * @access	Public
    */
@@ -211,7 +211,7 @@ module.exports = v1Router => {
   });
 
   /**
-   * @route		POST api/profile/education
+   * @route		POST api/v1/profiles/education
    * @desc		Create Experience
    * @access	Public
    */  
@@ -246,7 +246,7 @@ module.exports = v1Router => {
   });
 
   /**
-   * @route		DELETE api/profile/education/:education_id
+   * @route		DELETE api/v1/profiles/education/:education_id
    * @desc		Create Experience
    * @access	Private
    */  
@@ -272,7 +272,7 @@ module.exports = v1Router => {
   });
 
   /**
-   * @route		DELETE api/profile/
+   * @route		DELETE api/v1/profiles/
    * @desc		Delete user profile
    * @access	Private
    */  
